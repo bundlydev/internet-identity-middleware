@@ -1,17 +1,15 @@
-import { SignIdentity } from "@dfinity/agent";
-import { Ed25519PublicKey } from "@dfinity/identity";
+import { SignIdentity, Signature, PublicKey } from "@dfinity/agent";
 
-export class IncompleteEd25519KeyIdentity extends SignIdentity {
-  constructor(private readonly _publicKey: Ed25519PublicKey) {
+export class SessionIdentity extends SignIdentity {
+  constructor(private readonly _publicKey: PublicKey) {
     super();
   }
 
-  // We don't need to implement this method
-  // @ts-ignore
-  public sign(blob: ArrayBuffer): Promise<Signature> {}
-
-  // @ts-ignore
-  public getPublicKey() {
+  public getPublicKey(): PublicKey {
     return this._publicKey;
+  }
+
+  public sign(blob: ArrayBuffer): Promise<Signature> {
+    throw new Error("Not implemented");
   }
 }

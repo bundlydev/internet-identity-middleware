@@ -5,7 +5,7 @@ import { AuthClient } from "@dfinity/auth-client";
 import { DelegationIdentity, Ed25519PublicKey } from "@dfinity/identity";
 
 import { AuthContext } from "../context/auth.context";
-import { IncompleteEd25519KeyIdentity } from "../services/incomplete-identity";
+import { SessionIdentity } from "../services/incomplete-identity";
 import { useParams } from "./useParams";
 
 const INTERNET_IDENTITY_URL = process.env.REACT_APP_INTERNET_IDENTITY_URL || "https://identity.ic0.app";
@@ -18,11 +18,12 @@ export const useAuth = () => {
   async function login() {
     const publicKey = Ed25519PublicKey.fromDer(fromHex(pubkey));
 
-    const incompleteIdentity = new IncompleteEd25519KeyIdentity(publicKey);
+    // const identity = new PartialIdentity(publicKey);
+    const identity = new SessionIdentity(publicKey);
 
     try {
       const client = await AuthClient.create({
-        identity: incompleteIdentity,
+        identity
       });
 
       client.login({
@@ -35,10 +36,15 @@ export const useAuth = () => {
             const delegationString = JSON.stringify(delegation);
             setDelegation(delegationString);
 
+            console.log("Delegation", delegationString);
+
             authenticate();
+          } else {
+            console.log("Identity is not a delegation identity");
           }
         },
         onError: (err) => {
+          console.log("Error logging in");
           console.log(err);
         },
       });
