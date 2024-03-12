@@ -1,8 +1,8 @@
 # Internet Identity Middleware
 
-This middleware solves the communication problem when authenticating native applications (such as mobile applications) and Internet Identity.
+This middleware address the communication issues when authenticating native applications (such as mobile applications) and Internet Identity.
 
-It allows authentication to be performed in the Middleware and transfer that authentication to the application.
+It allows authentication to occur within the Middleware and then passes that authentication to the application.
 
 ## How to run
 
