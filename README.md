@@ -1,6 +1,8 @@
 # Internet Identity Middleware
 
-This project handles
+This middleware solves the communication problem when authenticating native applications (such as mobile applications) and Internet Identity.
+
+It allows authentication to be performed in the Middleware and transfer that authentication to the application.
 
 ## How to run
 
@@ -10,7 +12,7 @@ Copy .env-example and replace values
 cp .env-example .env
 ```
 
-Set your Internet Identity URL
+Set your Internet Identity URL (local or production)
 
 ```bash
 REACT_APP_INTERNET_IDENTITY_URL=https://identity.ic0.app
